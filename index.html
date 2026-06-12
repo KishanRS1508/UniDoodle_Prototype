@@ -276,6 +276,8 @@
   /* CHATBOT */
   .chat-toggle { position:fixed; bottom:22px; right:22px; width:122px; height:122px; background:transparent; border-radius:50%; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; overflow:visible; box-shadow:none; z-index:9999; transition:all 0.3s; }
   .chat-toggle.open { width:46px; height:46px; bottom:28px; right:28px; background:#fff; box-shadow:0 6px 22px rgba(15,40,128,0.32); }
+  .chat-toggle.lifted { bottom:104px; }
+  .chat-toggle.open.lifted { bottom:104px; }
   .chat-toggle.open .ico-close svg { width:16px; height:16px; }
   .chat-tg-img { width:124px; height:124px; object-fit:contain; display:block; filter:drop-shadow(0 9px 18px rgba(15,40,128,0.5)); transform-origin:bottom center; animation:chatPop 2.6s ease-in-out infinite; }
   @keyframes chatPop { 0%,100% { transform:scale(0.86); } 12% { transform:scale(1.14); } 24% { transform:scale(0.97); } 32% { transform:scale(1.04); } 42%,70% { transform:scale(1); } }
@@ -1304,10 +1306,6 @@ function setBilling(mode){
       <div style="display:flex;align-items:center;gap:10px;color:rgba(255,255,255,0.55);font-size:14px">
         Visuality Ltd. Co no. 751062
       </div>
-      <div style="width:1px;height:24px;background:rgba(255,255,255,0.15)"></div>
-      <div style="display:flex;align-items:center;gap:10px;color:rgba(255,255,255,0.55);font-size:14px">
-        Supported by MaynoothWorks
-      </div>
     </div>
   </div>
 </section>
@@ -1559,16 +1557,41 @@ function selectOpt(el){
   el.classList.add('selected');
 }
 
+var DEMO_DATA={
+  mcq:{title:'Class results (live)',rows:[
+    {label:'A: 2x + 3 \u2713',pct:68,hl:true},
+    {label:'B: x\u00B2 + 3',pct:12},
+    {label:'C: 2x',pct:14},
+    {label:'D: 3x + 1',pct:6}
+  ]},
+  sketch:{title:'Class results (live) \u00B7 22 of 24 sketches received',rows:[
+    {label:'Correct wave shape \u2713',pct:71,hl:true},
+    {label:'Right shape, off amplitude',pct:18},
+    {label:'Incomplete / needs review',pct:11}
+  ]},
+  text:{title:'Class results (live) \u00B7 AI-grouped responses',rows:[
+    {label:'Strong understanding \u2713',pct:62,hl:true},
+    {label:'Partially correct',pct:27},
+    {label:'Common misconception',pct:11}
+  ]}
+};
+var currentDemo='mcq';
+function renderResults(mode){
+  var d=DEMO_DATA[mode]||DEMO_DATA.mcq;
+  var r=document.getElementById('demoResult');if(!r)return;
+  var h='<div style="font-size:14px;font-weight:700;color:var(--text-dark);margin-bottom:14px">'+d.title+'</div>';
+  d.rows.forEach(function(row){
+    h+='<div class="result-label"><span>'+row.label+'</span><span>'+row.pct+'%</span></div>';
+    h+='<div class="result-bar"><div class="result-fill'+(row.hl?' orange':'')+'" data-pct="'+row.pct+'"></div></div>';
+  });
+  r.innerHTML=h;
+}
 function submitDemo(){
-  const r=document.getElementById('demoResult');r.classList.add('show');
-  setTimeout(()=>{
-    document.getElementById('barA').style.width='68%';
-    document.getElementById('barB').style.width='12%';
-    document.getElementById('barC').style.width='14%';
-    document.getElementById('barD').style.width='6%';
-  },150);
+  var r=document.getElementById('demoResult');renderResults(currentDemo);r.classList.add('show');
+  setTimeout(function(){r.querySelectorAll('.result-fill').forEach(function(f){f.style.width=f.getAttribute('data-pct')+'%';});},150);
   r.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
+renderResults('mcq');
 
 function switchDemo(type,btn){
   document.querySelectorAll('.demo-tab').forEach(t=>t.classList.remove('active'));
@@ -1577,6 +1600,7 @@ function switchDemo(type,btn){
   document.getElementById('sketchArea').style.display='none';
   document.getElementById('textArea').style.display='none';
   document.getElementById('demoResult').classList.remove('show');
+  currentDemo=type;renderResults(type);
   if(type==='mcq'){document.getElementById('mcqOptions').style.display='grid';document.getElementById('qText').textContent='What is the derivative of f(x) = x\u00B2 + 3x?';}
   else if(type==='sketch'){document.getElementById('sketchArea').style.display='block';document.getElementById('qText').textContent='Sketch the graph of y = sin(x) from 0 to 2\u03C0';initCanvas();}
   else{document.getElementById('textArea').style.display='block';document.getElementById('qText').textContent='In your own words, explain Newton\u2019s First Law of Motion.';}
@@ -2413,19 +2437,23 @@ function closeMobileMenu(){
 (function(){
   var shown = false, dismissed = false;
   var cta = document.getElementById('stickyCta');
+  var tog = document.getElementById('chatToggle');
   window.addEventListener('scroll', function(){
     if(dismissed) return;
     if(window.scrollY > 600 && !shown){
       shown = true;
       cta.classList.add('visible');
+      if(tog) tog.classList.add('lifted');
     } else if(window.scrollY < 200 && shown){
       shown = false;
       cta.classList.remove('visible');
+      if(tog) tog.classList.remove('lifted');
     }
   });
   window.dismissStickyCta = function(){
     dismissed = true;
     cta.classList.remove('visible');
+    if(tog) tog.classList.remove('lifted');
   };
 })();
 
