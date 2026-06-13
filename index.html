@@ -112,6 +112,15 @@
   .coverage-region { font-size:13px; color:var(--text-light); margin-bottom:16px; }
   .coverage-exams { display:flex; flex-wrap:wrap; gap:8px; }
   .coverage-exam { font-size:13px; font-weight:600; color:var(--blue); background:var(--blue-pale); border:1px solid var(--border); border-radius:100px; padding:6px 13px; }
+  .coverage-table-wrap { max-width:1000px; margin:0 auto; overflow-x:auto; }
+  .coverage-table { width:100%; border-collapse:collapse; background:white; border:1.5px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-md); min-width:640px; }
+  .coverage-table thead th { background:var(--blue-pale); color:var(--blue-dark); font-family:'Nunito',sans-serif; font-weight:800; font-size:12px; letter-spacing:0.6px; text-transform:uppercase; text-align:left; padding:16px 22px; }
+  .coverage-table td { padding:18px 22px; border-top:1px solid var(--border); vertical-align:middle; }
+  .coverage-country { display:flex; align-items:center; gap:13px; font-family:'Nunito',sans-serif; font-weight:800; font-size:18px; color:var(--text-dark); }
+  .coverage-table .coverage-flag { margin-bottom:0; flex-shrink:0; }
+  .coverage-table .coverage-flag.sm { width:34px; height:23px; }
+  .coverage-nation { display:flex; align-items:center; gap:11px; font-size:14px; font-weight:600; color:var(--text-mid); }
+  .coverage-table .coverage-exams { margin:0; }
   .center { text-align:center; }
   .center .section-sub { margin-left:auto; margin-right:auto; }
 
@@ -275,9 +284,9 @@
 
   /* CHATBOT */
   .chat-toggle { position:fixed; bottom:22px; right:22px; width:122px; height:122px; background:transparent; border-radius:50%; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; overflow:visible; box-shadow:none; z-index:9999; transition:all 0.3s; }
-  .chat-toggle.open { width:46px; height:46px; bottom:28px; right:28px; background:#fff; box-shadow:0 6px 22px rgba(15,40,128,0.32); }
+  .chat-toggle.open { width:46px; height:46px; bottom:28px; right:28px; background:#fff; box-shadow:0 6px 22px rgba(15,40,128,0.32); display:none; }
   .chat-toggle.lifted { bottom:104px; }
-  .chat-toggle.open.lifted { bottom:104px; }
+  .chat-toggle.open.lifted { bottom:28px; }
   .chat-toggle.open .ico-close svg { width:16px; height:16px; }
   .chat-tg-img { width:124px; height:124px; object-fit:contain; display:block; filter:drop-shadow(0 9px 18px rgba(15,40,128,0.5)); transform-origin:bottom center; animation:chatPop 2.6s ease-in-out infinite; }
   @keyframes chatPop { 0%,100% { transform:scale(0.86); } 12% { transform:scale(1.14); } 24% { transform:scale(0.97); } 32% { transform:scale(1.04); } 42%,70% { transform:scale(1); } }
@@ -298,6 +307,9 @@
   .chat-head-info h4 { font-size:14px; font-weight:700; color:white; }
   .chat-head-info p { font-size:12px; color:rgba(255,255,255,0.6); display:flex; align-items:center; gap:5px; }
   .chat-head-info p::before { content:''; width:6px; height:6px; background:#4ade80; border-radius:50%; }
+  .chat-close { margin-left:auto; width:30px; height:30px; border-radius:50%; border:none; background:rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; transition:background 0.2s; }
+  .chat-close:hover { background:rgba(255,255,255,0.22); }
+  .chat-close svg { width:14px; height:14px; }
   .chat-body { flex:1; overflow-y:auto; padding:18px 14px; display:flex; flex-direction:column; gap:12px; }
   .chat-body::-webkit-scrollbar { width:3px; }
   .chat-body::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
@@ -478,6 +490,7 @@
   .video-embed .ve-play { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:74px; height:74px; background:rgba(255,0,0,0.88); border-radius:18px; display:flex; align-items:center; justify-content:center; transition:all 0.2s; box-shadow:0 6px 20px rgba(0,0,0,0.35); }
   .video-embed:hover .ve-play { background:#ff0000; transform:translate(-50%,-50%) scale(1.07); }
   .video-embed .ve-play::after { content:''; border-style:solid; border-width:13px 0 13px 22px; border-color:transparent transparent transparent #fff; margin-left:5px; }
+  .video-embed video { position:absolute; inset:0; width:100%; height:100%; border:0; object-fit:cover; background:#000; }
   .post-meta { font-size:13px;color:var(--text-light);margin-top:56px;border-top:1px solid var(--border);padding-top:20px; }
   /* Our Team */
   .team-section { background:linear-gradient(180deg,#ffffff 0%,#f8f9ff 100%); padding:96px 5%; }
@@ -541,7 +554,7 @@
     <div>
       <div class="hero-badge">Student Response System</div>
       <h1>Connect, Engage and<br><span class="highlight">Ignite Learning</span></h1>
-      <p class="hero-sub">UniDoodle is a freehand student response tool that brings real-time visual feedback to classrooms. Let students draw graphs, sketch equations, and respond anonymously.</p>
+      <p class="hero-sub">UniDoodle is a real-time student response tool that turns any device into an interactive classroom companion. Lecturers can ask questions in any format, including sketches, polls, text, or images, and watch live, anonymous responses transform passive lectures into active conversations.</p>
       <div class="hero-actions">
         <a href="https://calendly.com/d/yzs-yw5-254" class="btn-primary">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="5" height="5" rx="1" fill="white"/><rect x="9" y="2" width="5" height="5" rx="1" fill="white"/><rect x="2" y="9" width="5" height="5" rx="1" fill="white"/><rect x="9" y="9" width="5" height="5" rx="1" fill="white" opacity="0.5"/></svg>
@@ -589,7 +602,7 @@
     <div class="center reveal">
       <div class="section-label">How it works</div>
       <h2 class="section-title">Up and running in 30 seconds</h2>
-      <p class="section-sub">No apps. No accounts. Just a join code on any device and your class is live.</p>
+      <p class="section-sub">Download the app or go to the website. Just a join code on any device and your class is live.</p>
     </div>
     <div class="steps-grid">
       <div class="step-card reveal">
@@ -597,8 +610,8 @@
         <div class="step-icon">
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="4" y="4" width="20" height="20" rx="3" stroke="var(--orange)" stroke-width="2" fill="none"/><line x1="4" y1="10" x2="24" y2="10" stroke="var(--orange)" stroke-width="1.5"/><line x1="10" y1="10" x2="10" y2="24" stroke="var(--orange)" stroke-width="1.5"/><rect x="14" y="14" width="6" height="6" rx="1" fill="var(--orange)" opacity="0.6"/></svg>
         </div>
-        <h3>Create a question</h3>
-        <p>Choose from sketching, multiple choice, typed text, or image upload. Build your question in seconds directly from the app or web portal.</p>
+        <h3>Create a question bank</h3>
+        <p>Choose from sketching, multiple choice, typed text, or image upload. Build your question in seconds directly from the app or web portal. This is the heart of UniDoodle: a simple way for lecturers to turn any idea into an interactive prompt that opens up real dialogue with students.</p>
       </div>
       <div class="step-card reveal" style="transition-delay:0.1s">
         <div class="step-num">02</div>
@@ -606,7 +619,7 @@
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="8" y="2" width="12" height="24" rx="3" stroke="var(--orange)" stroke-width="2" fill="none"/><circle cx="14" cy="21" r="1.5" fill="var(--orange)"/><line x1="10" y1="6" x2="18" y2="6" stroke="var(--orange)" stroke-width="1.5" stroke-linecap="round"/><rect x="11" y="10" width="6" height="8" rx="1" fill="var(--orange)" opacity="0.4"/></svg>
         </div>
         <h3>Students connect instantly</h3>
-        <p>Students join using a simple code on any phone, tablet or laptop. No app download, no account, no waiting.</p>
+        <p>Download the app or go to the website and create an account. Every student becomes an active participant rather than a passive listener, with a direct channel back to the lecturer.</p>
       </div>
       <div class="step-card reveal" style="transition-delay:0.2s">
         <div class="step-num">03</div>
@@ -614,7 +627,7 @@
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="3" y="18" width="4" height="8" rx="1" fill="var(--orange)" opacity="0.4"/><rect x="9" y="13" width="4" height="13" rx="1" fill="var(--orange)" opacity="0.6"/><rect x="15" y="8" width="4" height="18" rx="1" fill="var(--orange)"/><rect x="21" y="4" width="4" height="22" rx="1" fill="var(--orange)" opacity="0.3"/><path d="M5 14 L11 10 L17 6 L23 4" stroke="var(--orange)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
         </div>
         <h3>See real-time responses</h3>
-        <p>Watch responses stream in live. Identify misunderstandings on the spot and adapt your teaching before misconceptions take hold.</p>
+        <p>Watch responses stream in live. Identify misunderstandings on the spot and adapt your teaching before misconceptions take hold. From a lecturer's perspective, it's the closest thing to reading the whole room's mind at once, turning every lesson into a conversation rather than a monologue.</p>
       </div>
     </div>
   </div>
@@ -644,7 +657,7 @@
     <div class="reveal">
       <div class="section-label" style="color:var(--orange-light)">See it happen</div>
       <h2 class="section-title" style="color:white">Watch responses pour in, live</h2>
-      <p style="font-size:17px;color:rgba(255,255,255,0.65);line-height:1.65;margin-bottom:28px">The moment you launch a question, students respond and results update in real time — no refreshing, no waiting. Every answer shapes the next teaching moment.</p>
+      <p style="font-size:17px;color:rgba(255,255,255,0.65);line-height:1.65;margin-bottom:28px">The moment you launch a question, students respond and results update in real time, with no refreshing and no waiting. Every answer shapes the next teaching moment.</p>
       <div style="display:flex;flex-direction:column;gap:10px" id="simBars">
         <div class="sim-bar-wrap">
           <div class="sim-bar-label"><span>A: 2x + 3 ✓</span><span id="simPctA">0%</span></div>
@@ -760,27 +773,30 @@
     <div class="center reveal">
       <div class="section-label">Where we work</div>
       <h2 class="section-title">Built around the exams you teach</h2>
-      <p class="section-sub">UniDoodle supports classrooms across Ireland, the UK and Scotland, mapped to the curricula and exams that matter most to your students.</p>
+      <p class="section-sub">UniDoodle supports classrooms across Ireland and the United Kingdom, including England, Wales, Northern Ireland and Scotland, mapped to the curricula and exams that matter most to your students.</p>
     </div>
-    <div class="coverage-grid">
-      <div class="coverage-card reveal">
-        <div class="coverage-flag"><svg viewBox="0 0 60 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="40" fill="#169B62"/><rect x="20" width="20" height="40" fill="#fff"/><rect x="40" width="20" height="40" fill="#FF883E"/></svg></div>
-        <h3>Ireland</h3>
-        <div class="coverage-region">Republic of Ireland</div>
-        <div class="coverage-exams"><span class="coverage-exam">Leaving Certificate</span><span class="coverage-exam">Junior Cycle</span></div>
-      </div>
-      <div class="coverage-card reveal" style="transition-delay:0.1s">
-        <div class="coverage-flag"><svg viewBox="0 0 60 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><rect width="60" height="40" fill="#012169"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#fff" stroke-width="8"/><path d="M0,0 L60,40" stroke="#C8102E" stroke-width="3"/><path d="M60,0 L0,40" stroke="#C8102E" stroke-width="3"/><rect x="25" width="10" height="40" fill="#fff"/><rect y="15" width="60" height="10" fill="#fff"/><rect x="27" width="6" height="40" fill="#C8102E"/><rect y="17" width="60" height="6" fill="#C8102E"/></svg></div>
-        <h3>United Kingdom</h3>
-        <div class="coverage-region">England, Wales &amp; Northern Ireland</div>
-        <div class="coverage-exams"><span class="coverage-exam">GCSE</span><span class="coverage-exam">A-Levels</span></div>
-      </div>
-      <div class="coverage-card reveal" style="transition-delay:0.2s">
-        <div class="coverage-flag"><svg viewBox="0 0 60 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><rect width="60" height="40" fill="#0065BF"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#fff" stroke-width="6"/></svg></div>
-        <h3>Scotland</h3>
-        <div class="coverage-region">Scottish curriculum</div>
-        <div class="coverage-exams"><span class="coverage-exam">National 5</span><span class="coverage-exam">Highers</span><span class="coverage-exam">Advanced Highers</span></div>
-      </div>
+    <div class="coverage-table-wrap reveal">
+      <table class="coverage-table">
+        <thead>
+          <tr><th>Country</th><th>Nations &amp; regions</th><th>Related exams &amp; papers</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="coverage-country"><div class="coverage-flag"><svg viewBox="0 0 60 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="40" fill="#169B62"/><rect x="20" width="20" height="40" fill="#fff"/><rect x="40" width="20" height="40" fill="#FF883E"/></svg></div>Ireland</div></td>
+            <td><span class="coverage-nation">Republic of Ireland</span></td>
+            <td><div class="coverage-exams"><span class="coverage-exam">Leaving Certificate</span><span class="coverage-exam">Junior Cycle</span></div></td>
+          </tr>
+          <tr>
+            <td rowspan="2"><div class="coverage-country"><div class="coverage-flag"><svg viewBox="0 0 60 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><rect width="60" height="40" fill="#012169"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#fff" stroke-width="8"/><path d="M0,0 L60,40" stroke="#C8102E" stroke-width="3"/><path d="M60,0 L0,40" stroke="#C8102E" stroke-width="3"/><rect x="25" width="10" height="40" fill="#fff"/><rect y="15" width="60" height="10" fill="#fff"/><rect x="27" width="6" height="40" fill="#C8102E"/><rect y="17" width="60" height="6" fill="#C8102E"/></svg></div>United Kingdom</div></td>
+            <td><span class="coverage-nation">England, Wales &amp; Northern Ireland</span></td>
+            <td><div class="coverage-exams"><span class="coverage-exam">GCSE</span><span class="coverage-exam">A-Levels</span></div></td>
+          </tr>
+          <tr>
+            <td><div class="coverage-nation"><div class="coverage-flag sm"><svg viewBox="0 0 60 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><rect width="60" height="40" fill="#0065BF"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#fff" stroke-width="6"/></svg></div>Scotland</div></td>
+            <td><div class="coverage-exams"><span class="coverage-exam">National 5</span><span class="coverage-exam">Highers</span><span class="coverage-exam">Advanced Highers</span></div></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
@@ -804,7 +820,6 @@
         <div class="demo-dot" style="background:#FFBD2E"></div>
         <div class="demo-dot" style="background:#28C840"></div>
         <span style="font-size:13px;color:rgba(255,255,255,0.6);margin-left:10px">UniDoodle Live Session</span>
-        <span style="margin-left:auto;font-size:12px;color:#4ade80;display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;background:#4ade80;border-radius:50%;display:inline-block"></span>24 students connected</span>
       </div>
       <div class="demo-question">
         <div class="demo-q-label">Question 1 of 5</div>
@@ -962,7 +977,7 @@ function setBilling(mode){
             <div class="testimonial-role">Mathematics Lecturer, Australia</div>
           </div>
           <div class="testimonial-card" style="min-width:100%">
-            <p class="testimonial-text">&ldquo;UniDoodle has transformed the way I teach engineering. Students can now sketch circuit diagrams and share them in real time — it's the closest thing to a digital whiteboard that actually works in a lecture hall.&rdquo;</p>
+            <p class="testimonial-text">&ldquo;UniDoodle has transformed the way I teach engineering. Students can now sketch circuit diagrams and share them in real time. It's the closest thing to a digital whiteboard that actually works in a lecture hall.&rdquo;</p>
             <div class="testimonial-author">Engineering Lecturer</div>
             <div class="testimonial-role">University College Dublin, Ireland</div>
           </div>
@@ -1079,7 +1094,7 @@ function setBilling(mode){
     </div>
     <div class="reveal" style="max-width:760px;margin:34px auto 0;text-align:center">
       <blockquote style="font-size:19px;line-height:1.6;color:var(--text-dark);font-style:italic;font-weight:500;margin:0">“UniDoodle helps me, as a professor, easily identify struggling students and create a success plan for them.”</blockquote>
-      <div style="margin-top:14px;font-size:14px;font-weight:700;color:var(--blue)">— Fiona, Professor</div>
+      <div style="margin-top:14px;font-size:14px;font-weight:700;color:var(--blue)">Fiona, Professor</div>
     </div>
   </div>
 </section>
@@ -1398,6 +1413,9 @@ function setBilling(mode){
       <h4>Doodle Bot</h4>
       <p>Online now</p>
     </div>
+    <button class="chat-close" onclick="toggleChat()" aria-label="Close chat">
+      <svg viewBox="0 0 20 20" fill="none"><path d="M2 2L18 18M18 2L2 18" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/></svg>
+    </button>
   </div>
   <div class="chat-body" id="chatBody">
     <div class="chat-msg bot">
@@ -2269,7 +2287,7 @@ const BLOG_POSTS = {
     title: 'Meet the Graduate Interns',
     html: '<p>Get to know the fresh talent helping UniDoodle grow. Our graduate intern programme brings new energy, ideas and perspectives into the team.</p><p>Working side by side with our educators and developers, our interns help shape the tools that make classrooms more interactive, from research into real-world learning outcomes to the everyday details of the UniDoodle experience.</p>',
     videos: [
-      { id: 'KsZkt36m6Cw', cap: 'Webinar: UniDoodle & Zoom, making remote sessions interactive' }
+      { src: 'https://video.wixstatic.com/video/619249_eb818d2e94f44fe687da5845efd7dd3c/480p/mp4/file.mp4', cap: 'Meet the graduate interns' }
     ]
   },
   possible: {
@@ -2278,8 +2296,8 @@ const BLOG_POSTS = {
     title: 'Anything is Possible with UniDoodle',
     html: '<p>From maths equations to circuit diagrams, music notation to language characters, discover how educators across disciplines are using UniDoodle in unexpected ways.</p><p>Whatever the subject, if it can be drawn or written it can be captured, shared and reviewed in real time, helping every student show their thinking, not just their final answer.</p>',
     videos: [
-      { id: 'FYCp0VCJ5vI', cap: 'Enabling real-time in-class feedback using UniDoodle' },
-      { id: 'CnIXpDenbgA', cap: 'UniDoodle in a first-year engineering classroom' }
+      { src: 'https://video.wixstatic.com/video/619249_d2be32aa67e640bc85c0975a929d0e2a/480p/mp4/file.mp4', cap: 'UniDoodle across the disciplines' },
+      { src: 'https://video.wixstatic.com/video/619249_2920dfe58d9241dd8111922969ada74e/480p/mp4/file.mp4', cap: 'Anything is possible with UniDoodle' }
     ]
   },
   bett: {
@@ -2307,7 +2325,11 @@ function renderVideos(vids){
   vids.forEach(v => {
     out += '<div class="video-item">';
     if(v.cap) out += '<h3>' + v.cap + '</h3>';
-    out += '<div class="video-embed" onclick="playBlogVideo(this,&quot;' + v.id + '&quot;)" role="button" tabindex="0" aria-label="Play video"><img class="ve-poster" src="https://i.ytimg.com/vi/' + v.id + '/hqdefault.jpg" alt="' + v.cap + '"><div class="ve-play"></div></div>';
+    if(v.src){
+      out += '<div class="video-embed" style="cursor:default"><video controls playsinline preload="metadata" src="' + v.src + '"></video></div>';
+    } else {
+      out += '<div class="video-embed" onclick="playBlogVideo(this,&quot;' + v.id + '&quot;)" role="button" tabindex="0" aria-label="Play video"><img class="ve-poster" src="https://i.ytimg.com/vi/' + v.id + '/hqdefault.jpg" alt="' + v.cap + '"><div class="ve-play"></div></div>';
+    }
     out += '</div>';
   });
   out += '</div>';
@@ -2376,7 +2398,7 @@ function playFounderVideo(el){
 
 <!-- STICKY CTA BAR -->
 <div class="sticky-cta" id="stickyCta">
-  <span class="sticky-cta-text"><strong>UniDoodle</strong> — Real-time student response in 30 seconds. No accounts needed.</span>
+  <span class="sticky-cta-text"><strong>UniDoodle</strong>: Real-time student response in 30 seconds. No accounts needed.</span>
   <div style="display:flex;align-items:center;gap:10px">
     <a href="https://calendly.com/d/yzs-yw5-254" class="btn-primary" style="padding:10px 20px;font-size:14px">Book a Demo</a>
     <a href="https://unidoodle-dev.azurewebsites.net/account/login" class="btn-secondary" style="padding:10px 20px;font-size:14px">Try Free</a>
